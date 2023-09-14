@@ -128,5 +128,46 @@ public class Cartas {
 		}
 	 
 	 
+	 private static JSONObject criarJSONMao(List<String> cartasAlan, List<String> cartasBruno) {
+		    JSONArray maoAlan = new JSONArray();
+		    for (String carta : cartasAlan) {
+		        maoAlan.put(obterNomeCarta(carta));
+		    }
 
+		    JSONArray maoBruno = new JSONArray();
+		    for (String carta : cartasBruno) {
+		        maoBruno.put(obterNomeCarta(carta));
+		    }
+
+		    JSONObject cartas = new JSONObject();
+		    cartas.put("cartas", new JSONObject().put("Alan", maoAlan).put("Bruno", maoBruno));
+		    return cartas;
+		}
+	 
+	 
+	 private static String obterNomeCarta(String carta) {
+		    String valor = "";
+		    String naipe = "";
+
+		    String valorCarta = carta.substring(0, carta.length() - 1);
+		    switch (valorCarta) {
+		        case "J": valor = "Valete"; break;
+		        case "Q": valor = "Rainha"; break;
+		        case "K": valor = "Rei"; break;
+		        case "A": valor = "Ás"; break;
+		        default:
+		            valor = valorCarta;
+		            break;
+		    }
+
+		    switch (carta.substring(carta.length() - 1)) {
+		        case "H": naipe = "de Copas"; break;
+		        case "D": naipe = "de Ouros"; break;
+		        case "S": naipe = "de Espadas"; break;
+		        case "C": naipe = "de Paus"; break;
+		    }
+
+		    return valor + " " + naipe;
+		}
+	
 }
