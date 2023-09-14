@@ -6,15 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/HP/Documents/GitHub/DeckOfCards/DeckOfCards/libs/json-20230618.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/HP/Documents/GitHub/DeckOfCards/DeckOfCards/libs/json.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/HP/Documents/json-20230618.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

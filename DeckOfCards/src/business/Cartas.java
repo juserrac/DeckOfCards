@@ -64,13 +64,13 @@ public class Cartas {
 	 public static int obterValorCarta(String carta) {
 	        String valor = carta.substring(0, carta.length() - 1);
 	        switch (valor) {
-	            case "ACE":
+	            case "A":
 	                return 1;
-	            case "KING":
+	            case "K":
 	                return 13;
-	            case "QUEEN":
+	            case "Q":
 	                return 12;
-	            case "JACK":
+	            case "J":
 	                return 11;
 	            default:
 	                return Integer.parseInt(valor);
@@ -78,27 +78,27 @@ public class Cartas {
 	    }
 	 
 	 public static void organizarMao(List<String> cartas) {
-		    for (int i = 0; i < cartas.size() - 1; i++) {
-		        for (int j = 0; j < cartas.size() - i - 1; j++) {
-		            String carta1 = cartas.get(j);
-		            String carta2 = cartas.get(j + 1);
+		    boolean trocou;
+		    do {
+		        trocou = false;
+		        for (int i = 0; i < cartas.size() - 1; i++) {
+		            String carta1 = cartas.get(i);
+		            String carta2 = cartas.get(i + 1);
 
 		            int valor1 = obterValorCarta(carta1);
 		            int valor2 = obterValorCarta(carta2);
 
-		            if (valor1 > valor2) {
-		                Collections.swap(cartas, j, j + 1);
-		                
-		            } else if (valor1 == valor2) {
-		                String naipe1 = carta1.substring(carta1.length() - 1);
-		                String naipe2 = carta2.substring(carta2.length() - 1);
-		                if (naipe1.compareTo(naipe2) > 0) {
-		                    Collections.swap(cartas, j, j + 1);
-		                }
+		            String naipe1 = carta1.substring(carta1.lastIndexOf("de ") + 3); 
+		            String naipe2 = carta2.substring(carta2.lastIndexOf("de ") + 3); 
+
+		           
+		            if (naipe1.compareTo(naipe2) > 0 || (naipe1.equals(naipe2) && valor1 > valor2)) {
+		                Collections.swap(cartas, i, i + 1);
+		                trocou = true;
 		            }
 		        }
-		    }
-		}	 
+		    } while (trocou);
+		}
 
 	    
 	 public static boolean temSequencia(List<String> cartas) {
