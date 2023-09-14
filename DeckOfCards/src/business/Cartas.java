@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Cartas {
 	
-	 private static String criarNovoBaralho() throws IOException {
+	 public static String criarNovoBaralho() throws IOException {
 	        URL url = new URL("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1");
 	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 	        connection.setRequestMethod("GET");
@@ -34,7 +34,7 @@ public class Cartas {
 	        return jsonObject.getString("deck_id");
 	    }
 	 
-	 private static List<String> distribuirCartas(String deckId, String jogador, int numCartas) throws IOException {
+	 public static List<String> distribuirCartas(String deckId, String jogador, int numCartas) throws IOException {
 	        URL url = new URL("https://deckofcardsapi.com/api/deck/" + deckId + "/draw/?count=" + numCartas);
 	        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 	        connection.setRequestMethod("GET");
@@ -60,7 +60,7 @@ public class Cartas {
 	    }
 	 
 	 
-	 private static int obterValorCarta(String carta) {
+	 public static int obterValorCarta(String carta) {
 	        String valor = carta.substring(0, carta.length() - 1);
 	        switch (valor) {
 	            case "ACE":
@@ -76,7 +76,7 @@ public class Cartas {
 	        }
 	    }
 	 
-	 private static void organizarMao(List<String> cartas) {
+	 public static void organizarMao(List<String> cartas) {
 		    for (int i = 0; i < cartas.size() - 1; i++) {
 		        for (int j = 0; j < cartas.size() - i - 1; j++) {
 		            String carta1 = cartas.get(j);
@@ -100,7 +100,7 @@ public class Cartas {
 		}	 
 
 	    
-	 private static boolean temSequencia(List<String> cartas) {
+	 public static boolean temSequencia(List<String> cartas) {
 		    Map<String, Integer> contagemNaipe = new HashMap<>();
 		    int sequenciaAtual = 1;
 
@@ -128,7 +128,7 @@ public class Cartas {
 		}
 	 
 	 
-	 private static JSONObject criarJSONMao(List<String> cartasAlan, List<String> cartasBruno) {
+	 public static JSONObject criarJSONMao(List<String> cartasAlan, List<String> cartasBruno) {
 		    JSONArray maoAlan = new JSONArray();
 		    for (String carta : cartasAlan) {
 		        maoAlan.put(obterNomeCarta(carta));
@@ -145,7 +145,7 @@ public class Cartas {
 		}
 	 
 	 
-	 private static String obterNomeCarta(String carta) {
+	 public static String obterNomeCarta(String carta) {
 		    String valor = "";
 		    String naipe = "";
 
