@@ -72,36 +72,40 @@ public class Cartas {
 	                return 12;
 	            case "J":
 	                return 11;
+	            case "0":
+	            	return 10;
 	            default:
 	                return Integer.parseInt(valor);
 	        }
 	    }
 	 
 	 public static void organizarMao(List<String> cartas) {
-		    boolean trocou;
-		    do {
-		        trocou = false;
-		        for (int i = 0; i < cartas.size() - 1; i++) {
-		            String carta1 = cartas.get(i);
-		            String carta2 = cartas.get(i + 1);
+		    for (int i = 0; i < cartas.size() - 1; i++) {
+		        for (int j = 0; j < cartas.size() - i - 1; j++) {
+		            String carta1 = cartas.get(j);
+		            String carta2 = cartas.get(j + 1);
 
 		            int valor1 = obterValorCarta(carta1);
 		            int valor2 = obterValorCarta(carta2);
 
-		            String naipe1 = carta1.substring(carta1.lastIndexOf("de ") + 3); 
-		            String naipe2 = carta2.substring(carta2.lastIndexOf("de ") + 3); 
-
-		           
-		            if (naipe1.compareTo(naipe2) > 0 || (naipe1.equals(naipe2) && valor1 > valor2)) {
-		                Collections.swap(cartas, i, i + 1);
-		                trocou = true;
+		            if (valor1 > valor2) {
+		                Collections.swap(cartas, j, j + 1);
+		                
+		            } else if (valor1 == valor2) {
+		                String naipe1 = carta1.substring(carta1.length() - 1);
+		                String naipe2 = carta2.substring(carta2.length() - 1);
+		                if (naipe1.compareTo(naipe2) > 0) {
+		                    Collections.swap(cartas, j, j + 1);
+		                }
 		            }
 		        }
-		    } while (trocou);
-		}
+		    }
+		}	 
 
 	    
 	 public static boolean temSequencia(List<String> cartas) {
+		    organizarMao(cartas);
+
 		    Map<String, Integer> contagemNaipe = new HashMap<>();
 		    int sequenciaAtual = 1;
 
@@ -111,8 +115,8 @@ public class Cartas {
 
 		        int valorAtual = obterValorCarta(cartaAtual);
 		        int valorProximaCarta = obterValorCarta(proximaCarta);
-		        String naipeAtual = cartaAtual.substring(cartaAtual.length() - 1);
-		        String naipeProximaCarta = proximaCarta.substring(proximaCarta.length() - 1);
+		        String naipeAtual = cartaAtual.substring(cartaAtual.lastIndexOf("de ") + 3);
+		        String naipeProximaCarta = proximaCarta.substring(proximaCarta.lastIndexOf("de ") + 3);
 
 		        if (naipeAtual.equals(naipeProximaCarta) && valorProximaCarta == valorAtual + 1) {
 		            sequenciaAtual++;
@@ -156,6 +160,7 @@ public class Cartas {
 		        case "Q": valor = "Rainha"; break;
 		        case "K": valor = "Rei"; break;
 		        case "A": valor = "Ás"; break;
+		        case "0": valor = "10"; break;
 		        default:
 		            valor = valorCarta;
 		            break;
