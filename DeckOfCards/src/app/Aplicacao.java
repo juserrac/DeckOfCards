@@ -17,12 +17,14 @@ public class Aplicacao {
             Cartas.organizarMao(cartasAlan);
             Cartas.organizarMao(cartasBruno);
 
-            boolean sequenciaAlan = Cartas.temSequencia(cartasAlan);
             boolean sequenciaBruno = Cartas.temSequencia(cartasBruno);
+            boolean sequenciaAlan = Cartas.temSequencia(cartasAlan);
+            
 
             JSONObject resultado = Cartas.criarJSONMao(cartasAlan, cartasBruno);
-            resultado.put("tem_sequencia_alan", sequenciaAlan);
             resultado.put("tem_sequencia_bruno", sequenciaBruno);
+            resultado.put("tem_sequencia_alan", sequenciaAlan);
+           
 
             String vencedor = "empate";
             if (sequenciaAlan && !sequenciaBruno) {

@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 
 
@@ -80,33 +78,24 @@ public class Cartas {
 	    }
 	 
 	 public static void organizarMao(List<String> cartas) {
-		    for (int i = 0; i < cartas.size() - 1; i++) {
-		        for (int j = 0; j < cartas.size() - i - 1; j++) {
-		            String carta1 = cartas.get(j);
-		            String carta2 = cartas.get(j + 1);
+		    Collections.sort(cartas, (carta1, carta2) -> {
+		        String naipe1 = carta1.substring(carta1.lastIndexOf("de ") + 3);
+		        String naipe2 = carta2.substring(carta2.lastIndexOf("de ") + 3);
+		        int valor1 = obterValorCarta(carta1);
+		        int valor2 = obterValorCarta(carta2);
 
-		            int valor1 = obterValorCarta(carta1);
-		            int valor2 = obterValorCarta(carta2);
-
-		            if (valor1 > valor2) {
-		                Collections.swap(cartas, j, j + 1);
-		                
-		            } else if (valor1 == valor2) {
-		                String naipe1 = carta1.substring(carta1.length() - 1);
-		                String naipe2 = carta2.substring(carta2.length() - 1);
-		                if (naipe1.compareTo(naipe2) > 0) {
-		                    Collections.swap(cartas, j, j + 1);
-		                }
-		            }
+		        if (naipe1.equals(naipe2)) {
+		            return Integer.compare(valor1, valor2);
+		        } else {
+		            return naipe1.compareTo(naipe2);
 		        }
-		    }
-		}	 
+		    });
+		}
 
 	    
 	 public static boolean temSequencia(List<String> cartas) {
 		    organizarMao(cartas);
 
-		    Map<String, Integer> contagemNaipe = new HashMap<>();
 		    int sequenciaAtual = 1;
 
 		    for (int i = 0; i < cartas.size() - 1; i++) {
