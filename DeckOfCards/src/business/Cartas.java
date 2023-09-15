@@ -79,8 +79,8 @@ public class Cartas {
 	 
 	 public static void organizarMao(List<String> cartas) {
 		    Collections.sort(cartas, (carta1, carta2) -> {
-		        String naipe1 = carta1.substring(carta1.lastIndexOf("de ") + 3);
-		        String naipe2 = carta2.substring(carta2.lastIndexOf("de ") + 3);
+		        String naipe1 = carta1.substring(carta1.length() - 1);
+		        String naipe2 = carta2.substring(carta2.length() - 1);
 		        int valor1 = obterValorCarta(carta1);
 		        int valor2 = obterValorCarta(carta2);
 
@@ -101,11 +101,12 @@ public class Cartas {
 		    for (int i = 0; i < cartas.size() - 1; i++) {
 		        String cartaAtual = cartas.get(i);
 		        String proximaCarta = cartas.get(i + 1);
+		       // String terceiraCarta = cartas
 
 		        int valorAtual = obterValorCarta(cartaAtual);
 		        int valorProximaCarta = obterValorCarta(proximaCarta);
-		        String naipeAtual = cartaAtual.substring(cartaAtual.lastIndexOf("de ") + 3);
-		        String naipeProximaCarta = proximaCarta.substring(proximaCarta.lastIndexOf("de ") + 3);
+		        String naipeAtual = cartaAtual.substring(cartaAtual.length() - 1);
+		        String naipeProximaCarta = proximaCarta.substring(proximaCarta.length() - 1);
 
 		        if (naipeAtual.equals(naipeProximaCarta) && valorProximaCarta == valorAtual + 1) {
 		            sequenciaAtual++;
