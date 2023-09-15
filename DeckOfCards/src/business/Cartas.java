@@ -101,7 +101,7 @@ public class Cartas {
 		    for (int i = 0; i < cartas.size() - 1; i++) {
 		        String cartaAtual = cartas.get(i);
 		        String proximaCarta = cartas.get(i + 1);
-		       // String terceiraCarta = cartas
+	
 
 		        int valorAtual = obterValorCarta(cartaAtual);
 		        int valorProximaCarta = obterValorCarta(proximaCarta);
@@ -141,29 +141,20 @@ public class Cartas {
 	 
 	 
 	 public static String obterNomeCarta(String carta) {
-		    String valor = "";
+		    int valor = obterValorCarta(carta);
 		    String naipe = "";
 
-		    String valorCarta = carta.substring(0, carta.length() - 1);
-		    switch (valorCarta) {
-		        case "J": valor = "Valete"; break;
-		        case "Q": valor = "Rainha"; break;
-		        case "K": valor = "Rei"; break;
-		        case "A": valor = "Ás"; break;
-		        case "0": valor = "10"; break;
-		        default:
-		            valor = valorCarta;
-		            break;
-		    }
-
 		    switch (carta.substring(carta.length() - 1)) {
-		        case "H": naipe = "de Copas"; break;
-		        case "D": naipe = "de Ouros"; break;
-		        case "S": naipe = "de Espadas"; break;
-		        case "C": naipe = "de Paus"; break;
+		        case "H": naipe = "de Copas";
+		            break;
+		        case "D": naipe = "de Ouros";
+		            break;
+		        case "S": naipe = "de Espadas";
+		            break;
+		        case "C": naipe = "de Paus";
+		            break;
 		    }
 
 		    return valor + " " + naipe;
 		}
-	
 }
