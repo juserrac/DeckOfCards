@@ -12,4 +12,4 @@ O projeto está dividido em uma camada de aplicação (package app) e uma camada
 
 ## Instruções de utilização
 
-É necessário um compilador para executar o projeto Java. Para o desenvolvimento desse projeto, foi utilizado o Eclipse.
+É necessário compilar e executar o projeto Java. Para o desenvolvimento desse projeto, foi utilizado o Eclipse.
